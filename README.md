@@ -3,18 +3,26 @@
 
 
 环境为：
+
 python2.7
+
 tensorflow1.6
+
 jieba分词
 
 
 数据为：
+
 mscoco2014图片数据
+
 预训练的VGG16模型
+
 百度的中文人工标注数据FM-IQA
 
 MSCOCO 2014: http://cocodataset.org/#download
+
 VGG16 Model: https://github.com/ry/tensorflow-vgg16
+
 FM-IQA Data: http://idl.baidu.com/FM-IQA.html
 
 
