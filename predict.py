@@ -6,6 +6,7 @@ import numpy as np
 from os.path import isfile, join
 import utils
 import re
+import jieba
 
 def main():
 	parser = argparse.ArgumentParser()
@@ -41,7 +42,7 @@ def main():
 	qvocab = vocab_data['question_vocab']
 	q_map = { vocab_data['question_vocab'][qw] : qw for qw in vocab_data['question_vocab']}
 	
-	fc7_features = utils.extract_fc7_features(args.image_path, join(args.data_dir, 'vgg16.tfmodel'))
+	fc7_features = utils.extract_fc7_features(args.image_path, join(args.data_dir, 'vgg16-20160129.tfmodel'))
 	
 	model_options = {
 		'num_lstm_layers' : args.num_lstm_layers,
@@ -56,9 +57,8 @@ def main():
 	}
 	
 	question_vocab = vocab_data['question_vocab']
-	word_regex = re.compile(r'\w+')
 	question_ids = np.zeros((1, vocab_data['max_question_length']), dtype = 'int32')
-	question_words = re.findall(word_regex, args.question)
+	question_words = jieba.lcut(args.question)
 	base = vocab_data['max_question_length'] - len(question_words)
 	for i in range(0, len(question_words)):
 		if question_words[i] in question_vocab:
